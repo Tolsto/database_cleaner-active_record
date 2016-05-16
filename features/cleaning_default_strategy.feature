@@ -13,11 +13,3 @@ Feature: database cleaning
   Examples:
     | ORM          |
     | ActiveRecord |
-    | DataMapper   |
-    | Sequel       |
-    | MongoMapper  |
-    | Mongoid      |
-    | CouchPotato  |
-    | Redis        |
-    | Ohm          |
-    | Neo4j        |

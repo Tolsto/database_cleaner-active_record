@@ -35,10 +35,10 @@ Gem::Specification.new do |s|
   s.summary = "Strategies for cleaning databases using ActiveRecord.  Can be used to ensure a clean state for testing."
 
   # s.add_dependency "database_cleaner", "~> 2.0"
-  s.add_development_dependency "rake"
+  s.add_development_dependency "rake", '~> 10.5'
   s.add_development_dependency "bundler"
   s.add_development_dependency "activerecord-mysql2-adapter" unless RUBY_PLATFORM =~ /java/
-  s.add_development_dependency "activerecord"
+  s.add_development_dependency "activerecord", ">= 4.0", "< 6.0"
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency "rspec-rails", "~> 2.14.2"
   s.add_development_dependency "cucumber"

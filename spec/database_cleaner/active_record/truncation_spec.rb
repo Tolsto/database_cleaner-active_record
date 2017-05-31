@@ -1,6 +1,8 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 require 'active_record'
-require 'active_record/connection_adapters/mysql_adapter'
+if ActiveRecord::VERSION::MAJOR < 5
+  require 'active_record/connection_adapters/mysql_adapter'
+end
 require 'active_record/connection_adapters/mysql2_adapter'
 require 'active_record/connection_adapters/sqlite3_adapter'
 require 'active_record/connection_adapters/postgresql_adapter'
@@ -9,8 +11,15 @@ require 'database_cleaner/active_record/truncation'
 
 module ActiveRecord
   module ConnectionAdapters
-    #JdbcAdapter IBM_DBAdapter
-    [ MysqlAdapter, Mysql2Adapter, SQLite3Adapter, PostgreSQLAdapter ].each do |adapter|
+    def self.adapters
+      if ActiveRecord::VERSION::MAJOR < 5
+        [ MysqlAdapter, Mysql2Adapter, SQLite3Adapter, PostgreSQLAdapter ]
+      else
+        [ Mysql2Adapter, SQLite3Adapter, PostgreSQLAdapter ]
+      end
+    end
+
+    adapters.each do |adapter|
       describe adapter, "#truncate_table" do
         it "responds" do
           adapter.instance_methods.should include(:truncate_table)
